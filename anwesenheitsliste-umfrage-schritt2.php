@@ -224,24 +224,15 @@ if ($selected_vehicle_id > 0) {
     </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <div class="container">
-            <a class="navbar-brand" href="index.php<?php echo $einheit_id > 0 ? '?einheit_id=' . (int)$einheit_id : ''; ?>"><i class="fas fa-fire"></i> Feuerwehr App</a>
-            <?php if (isset($_SESSION['user_id']) && !is_system_user()): ?>
-                <div class="d-flex ms-auto">
-                <?php
-                $admin_menu_in_navbar = true;
-                $admin_menu_base = 'admin/';
-                $admin_menu_logout = 'logout.php';
-                $admin_menu_index = 'index.php' . ($einheit_id > 0 ? '?einheit_id=' . (int)$einheit_id : '');
-                include __DIR__ . '/admin/includes/admin-menu.inc.php';
-                ?>
-                </div>
-            <?php else: ?>
-                <?php include __DIR__ . '/includes/system-user-nav.inc.php'; ?>
-            <?php endif; ?>
-        </div>
-    </nav>
+    <?php
+    $ff_ein_q = ($einheit_id > 0 ? '?einheit_id=' . (int)$einheit_id : '');
+    $ff_brand_href = 'index.php' . $ff_ein_q;
+    $admin_menu_base = 'admin/';
+    $admin_menu_logout = 'logout.php';
+    $admin_menu_index = 'index.php' . $ff_ein_q;
+    $ff_nav_container_fluid = false;
+    include __DIR__ . '/includes/chrome-navbar.inc.php';
+    ?>
 
     <main class="container mt-4">
         <div class="row justify-content-center">

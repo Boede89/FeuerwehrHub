@@ -167,14 +167,8 @@ foreach ($fahrzeuge as $f) {
     </style>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="../index.php"><i class="fas fa-fire"></i> Feuerwehr App</a>
-        <div class="d-flex ms-auto align-items-center">
-            <?php $admin_menu_in_navbar = true; include __DIR__ . '/includes/admin-menu.inc.php'; ?>
-        </div>
-    </div>
-</nav>
+<?php include __DIR__ . '/../includes/chrome-navbar.inc.php'; ?>
+
 
 <div class="container mt-4">
     <h1 class="h3 mb-0"><i class="fas fa-wrench text-info"></i> Gerätewartmitteilung bearbeiten</h1>

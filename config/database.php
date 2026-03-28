@@ -32,4 +32,9 @@ class Database {
 // Globale Datenbankverbindung
 $database = new Database();
 $db = $database->getConnection();
+
+if ($db) {
+    require_once __DIR__ . '/../includes/ui-theme.php';
+    feuerwehr_ensure_ui_theme_setting($db);
+}
 ?>

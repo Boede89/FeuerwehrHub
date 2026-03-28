@@ -191,7 +191,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && (!isset($_POST['action']) || $_POST[
 }
 ?>
 <!DOCTYPE html>
-<html lang="de">
+<html lang="de" class="<?php echo (function_exists('is_hub_ui_theme') && is_hub_ui_theme()) ? 'ff-hub-ui' : ''; ?>">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -200,7 +200,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && (!isset($_POST['action']) || $_POST[
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="assets/css/style.css" rel="stylesheet">
 </head>
-<body class="bg-light">
+<body class="<?php echo (function_exists('is_hub_ui_theme') && is_hub_ui_theme()) ? 'ff-login-hub' : 'bg-light'; ?>">
     <div class="container">
         <div class="row justify-content-center min-vh-100 align-items-center">
             <div class="col-md-6 col-lg-4">

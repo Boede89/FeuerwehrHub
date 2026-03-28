@@ -374,9 +374,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && (!isset($_POST['action']) || $_POST
                 save_settings_bulk_for_einheit($db, $save_einheit_id, $all);
             } else {
                 // Global: App, Feedback-E-Mail, SMTP (für Feedback/Wünsche unabhängig von Einheiten)
+                $ui_theme_post = strtolower(trim(sanitize_input($_POST['ui_theme'] ?? 'classic')));
+                if (!in_array($ui_theme_post, ['classic', 'hub'], true)) {
+                    $ui_theme_post = 'classic';
+                }
                 $all = [
                     'app_name' => sanitize_input($_POST['app_name'] ?? ''),
                     'app_url' => sanitize_input($_POST['app_url'] ?? ''),
+                    'ui_theme' => $ui_theme_post,
                     'feedback_email' => trim(sanitize_input($_POST['feedback_email'] ?? '')),
                     'smtp_host' => sanitize_input($_POST['global_smtp_host'] ?? ''),
                     'smtp_port' => sanitize_input($_POST['global_smtp_port'] ?? ''),
@@ -438,14 +443,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && (!isset($_POST['action']) || $_POST
     <link href="../assets/css/style.css" rel="stylesheet">
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="../index.php"><i class="fas fa-fire"></i> Feuerwehr App</a>
-            <div class="d-flex ms-auto align-items-center">
-                <?php $admin_menu_in_navbar = true; include __DIR__ . '/includes/admin-menu.inc.php'; ?>
-            </div>
-    </div>
-    </nav>
+<?php include __DIR__ . '/../includes/chrome-navbar.inc.php'; ?>
+
 
 <div class="container-fluid mt-4">
     <div class="d-flex justify-content-between align-items-center mb-3">
@@ -494,6 +493,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && (!isset($_POST['action']) || $_POST
                             <input class="form-control" name="app_url" value="<?php echo htmlspecialchars($settings['app_url'] ?? ''); ?>" placeholder="z.B. https://feuerwehr.example.de">
                             <small class="text-muted">Basis-URL der Anwendung (wird z.B. für E-Mails und Links verwendet).</small>
                         </div>
+                        <div class="mb-3">
+                            <label class="form-label d-block">Erscheinungsbild</label>
+                            <div class="d-flex flex-wrap align-items-center gap-3">
+                                <span class="small text-muted">Klassisch</span>
+                                <input type="range" class="form-range flex-grow-1" style="max-width: 280px;" id="ff_ui_theme_range" min="0" max="1" step="1" value="<?php echo (($settings['ui_theme'] ?? 'classic') === 'hub') ? '1' : '0'; ?>" aria-label="Design wählen">
+                                <span class="small text-muted">FeuerwehrHub</span>
+                            </div>
+                            <input type="hidden" name="ui_theme" id="ff_ui_theme_hidden" value="<?php echo htmlspecialchars(($settings['ui_theme'] ?? 'classic') === 'hub' ? 'hub' : 'classic'); ?>">
+                            <small class="text-muted d-block mt-1">Klassisch entspricht der bisherigen Oberfläche. FeuerwehrHub verwendet ein dunkles Layout mit Kopfzeile und seitlicher Navigation (Optik wie im Referenzprojekt). Alle Funktionen bleiben gleich.</small>
+                        </div>
+                        <script>
+                        (function(){
+                            var r = document.getElementById('ff_ui_theme_range');
+                            var h = document.getElementById('ff_ui_theme_hidden');
+                            if (r && h) {
+                                r.addEventListener('input', function() { h.value = this.value === '1' ? 'hub' : 'classic'; });
+                            }
+                        })();
+                        </script>
                     </div>
                 </div>
             </div>

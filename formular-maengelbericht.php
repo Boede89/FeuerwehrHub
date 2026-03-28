@@ -207,33 +207,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['save_maengelbericht']
     <link href="assets/css/style.css" rel="stylesheet">
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <div class="container">
-            <a class="navbar-brand" href="index.php<?php echo $einheit_param; ?>"><i class="fas fa-fire"></i> Feuerwehr App</a>
-            <?php if (isset($_SESSION['user_id']) && !is_system_user()): ?>
-                <div class="d-flex ms-auto">
-                <?php
-                $admin_menu_in_navbar = true;
-                $admin_menu_base = 'admin/';
-                $admin_menu_logout = 'logout.php';
-                $admin_menu_index = 'index.php' . $einheit_param;
-                include __DIR__ . '/admin/includes/admin-menu.inc.php';
-                ?>
-                </div>
-            <?php else: ?>
-                <?php if (!isset($_SESSION['user_id'])): ?>
-                <div class="d-flex ms-auto align-items-center">
-                    <a class="btn btn-outline-light btn-sm px-3 py-2 d-flex align-items-center gap-2" href="login.php">
-                        <i class="fas fa-sign-in-alt"></i>
-                        <span class="fw-semibold">Anmelden</span>
-                    </a>
-                </div>
-                <?php else: ?>
-                <?php include __DIR__ . '/includes/system-user-nav.inc.php'; ?>
-                <?php endif; ?>
-            <?php endif; ?>
-        </div>
-    </nav>
+    <?php
+$ff_brand_href = 'index.php' . $einheit_param;
+$admin_menu_base = 'admin/';
+$admin_menu_logout = 'logout.php';
+$admin_menu_index = 'index.php' . $einheit_param;
+$ff_nav_container_fluid = false;
+include __DIR__ . '/includes/chrome-navbar.inc.php';
+?>
+
 <main class="container mt-4">
     <div class="row justify-content-center">
         <div class="col-lg-8">

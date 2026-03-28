@@ -49,14 +49,8 @@ if (!$isAdmin && !$canAtemschutz) {
 </head>
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="dashboard.php"><i class="fas fa-fire"></i> Feuerwehr App</a>
-        <div class="d-flex ms-auto align-items-center">
-            <?php $admin_menu_in_navbar = true; include __DIR__ . '/includes/admin-menu.inc.php'; ?>
-        </div>
-    </div>
-    </nav>
+<?php $ff_brand_href = 'dashboard.php'; include __DIR__ . '/../includes/chrome-navbar.inc.php'; ?>
+
 
 <div class="container-fluid mt-4">
     <div class="d-flex justify-content-between align-items-center mb-3">

@@ -1,5 +1,7 @@
 /* Feuerwehr App - Custom Styles */
 
+@import url("hub-theme.css");
+
 :root {
     --primary-color: #dc3545;
     --secondary-color: #6c757d;
