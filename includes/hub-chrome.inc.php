@@ -17,11 +17,6 @@ $ff_script_in_admin = (bool) preg_match('#/admin/#', $script_path);
 $script_name = $_SERVER['SCRIPT_NAME'] ?? '';
 $sn = $script_name;
 
-function ff_hub_nav_active(string $needle): bool {
-    global $sn;
-    return $sn !== '' && strpos($sn, $needle) !== false;
-}
-
 $app_title = ff_setting_get('app_name', 'Feuerwehr App');
 $hub_user_label = '';
 if (isset($_SESSION['user_id'])) {

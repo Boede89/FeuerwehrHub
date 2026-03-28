@@ -1,6 +1,5 @@
 /* FeuerwehrHub-Optik (dunkel, Sidebar) – nur aktiv mit Klasse html.ff-hub-ui */
-
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+/* Kein @import von fonts.googleapis.com: sonst blockiert die CSP in .htaccess (style-src) die Seite bzw. wichtige Styles. */
 
 html.ff-hub-ui {
   color-scheme: dark;

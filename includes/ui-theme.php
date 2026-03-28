@@ -7,8 +7,15 @@ function feuerwehr_ensure_ui_theme_setting(PDO $db): void {
     try {
         $stmt = $db->prepare("INSERT IGNORE INTO settings (setting_key, setting_value) VALUES ('ui_theme', 'classic')");
         $stmt->execute();
-    } catch (Exception $e) {
-        // Tabelle/Key kann je nach Installation variieren
+    } catch (Throwable $e) {
+        error_log('ui_theme ensure: ' . $e->getMessage());
+    }
+}
+
+if (!function_exists('ff_hub_nav_active')) {
+    function ff_hub_nav_active(string $needle): bool {
+        $sn = $_SERVER['SCRIPT_NAME'] ?? '';
+        return $sn !== '' && strpos($sn, $needle) !== false;
     }
 }
 

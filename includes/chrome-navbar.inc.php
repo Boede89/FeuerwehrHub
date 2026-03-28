@@ -33,7 +33,7 @@ if (is_hub_ui_theme()) {
         define('FF_HUB_UI_FLAG', true);
         echo '<script>document.documentElement.classList.add("ff-hub-ui");</script>';
     }
-    include __DIR__ . '/hub-chrome.inc.php';
+    include_once __DIR__ . '/hub-chrome.inc.php';
     return;
 }
 
